@@ -1,74 +1,30 @@
+import React, { useState } from 'react';
+import Program7 from './components/Programs7-8/Program7';
+import Program8 from './components/Programs7-8/Program8';
 
-import './App.css';
-// import Arrow from './components/Arrow';
-// import Bind from './components/Bind';
-// import EventHandler from './components/EventHandler';
-// import EventOnMouse from './components/EventOnMouse';
-// import FocusAndBlur from './components/FocusAndBlur';
-// import QuizApp from './components/QuizApp';
-
-import Child from "./components/eventhandlers/MethodAsProps";
-import Weather from './components/WeatherApp/Weather';
 
 function App() {
+  const [user, setUser] = useState(() => JSON.parse(sessionStorage.getItem('user')) || null);
 
-  const greet = () => {
-    alert("Hello From App.js");
-
-  }
+  const handleLogout = () => {
+    sessionStorage.removeItem('user');
+    setUser(null);
+  };
 
   return (
     <div className="App">
-      {/* <QuizApp/> */}
-      {/* <FocusAndBlur/>
-      <EventHandler/>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <EventOnMouse/>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br> */}
-{/* 
-      <Bind/>
-
-      <Arrow/> */}
-
-      {/* <Child greet={greet} /> */}
-
-      <div className="p-6">
-        <h1 className="text-3xl font-bold mb-4">Welcome to Our Website</h1>
-        <Weather/>
-        {/* Other homepage sections */}
-      </div>
-
-
-
-
-
-      
-
-
+      {user ? (
+        <>
+          <div className="p-4">
+            <p>Welcome, {user.username}!</p>
+            <button onClick={handleLogout} className="bg-red-500 text-white px-3 py-1 rounded">Logout</button>
+          </div>
+          
+          <Program7/>
+        </>
+      ) : (
+        <Program8 onLogin={setUser}/>
+      )}
     </div>
   );
 }
