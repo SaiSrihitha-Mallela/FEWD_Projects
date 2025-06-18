@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import Program7 from './components/Programs7-8/Program7';
-import Program8 from './components/Programs7-8/Program8';
+import {Routes , Route} from 'react-router-dom';
+import Home from './components/pages/Home';
+import About from './components/pages/About';
 
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      {user ? (
+      {/* {user ? (
         <>
           <div className="p-4">
             <p>Welcome, {user.username}!</p>
@@ -24,7 +25,18 @@ function App() {
         </>
       ) : (
         <Program8 onLogin={setUser}/>
-      )}
+      )} */}
+
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/about" element={<About/>} />
+      </Routes>
+
+
+
+
+
+
     </div>
   );
 }
